@@ -1,4 +1,4 @@
-# NFT Sala is a NFT Marketplace deployed on sepolia test net
+# NFT Shala is a NFT Marketplace deployed on sepolia test net
 ### Tech stack
    - Frontend
      - Reactjs
