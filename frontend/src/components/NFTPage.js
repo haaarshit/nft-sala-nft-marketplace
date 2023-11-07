@@ -7,8 +7,8 @@ function NFTPage() {
   const { id } = useParams()
   const [nft, setNft] = useState({ name: "", description: "", image: "", price: "", seller: "", owner: "" })
   const [tokenUri, setTokenUri] = useState("")
-  const [Contract,setContract] = useState({})
-  const [isSeller,setIsSeller] = useState(false)
+  const [Contract, setContract] = useState({})
+  const [isSeller, setIsSeller] = useState(false)
   const getNft = async () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum)
@@ -18,7 +18,7 @@ function NFTPage() {
       const tokenUri = await contract.tokenURI(id)
       setTokenUri(tokenUri)
       const token = await contract.getTokenFromId(id)
-      let metadata = await axios.get(tokenUri) 
+      let metadata = await axios.get(tokenUri)
       const data = metadata.data
       const nft = {
         name: data.name,
@@ -29,21 +29,21 @@ function NFTPage() {
         owner: token._ownerOf
       }
       setNft(nft)
-      if(signer.address == nft.seller) setIsSeller(true)
+      if (signer.address == nft.seller) setIsSeller(true)
     }
     catch (er) {
       console.log(er)
     }
   }
-  const executeSale = async(e)=>{
-    try{
+  const executeSale = async (e) => {
+    try {
 
       e.preventDefault()
-      const price =  ethers.parseUnits(nft.price,"ether")
-      await Contract.executeSale(id,{value:price})
+      const price = ethers.parseUnits(nft.price, "ether")
+      await Contract.executeSale(id, { value: price })  
       alert("NFT sold")
     }
-    catch(err){
+    catch (err) {
       console.log(err)
     }
   }
@@ -73,8 +73,8 @@ function NFTPage() {
             </p>
             <p className='text-[20px] font-bold'>{nft.price}  ETH</p>
             {
-              !isSeller &&  
-            <button onClick={e=>{executeSale(e)}} className=' font-semibold bg-indigo-500 p-2  rounded-[5px] hover:bg-green-400 hover:text-black linear duration-100 font-semibold '>Buy Now</button>
+              !isSeller &&
+              <button onClick={e => { executeSale(e) }} className=' font-semibold bg-indigo-500 p-2  rounded-[5px] hover:bg-green-400 hover:text-black linear duration-100 font-semibold '>Buy Now</button>
             }
           </div>
         </div>

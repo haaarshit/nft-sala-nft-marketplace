@@ -12,13 +12,13 @@ function Home() {
       let contract = new ethers.Contract(marketPlace.address, marketPlace.abi, signer)
 
       const transaction = await contract.getAllNFTs()
-      console.log(transaction)
+      console.log('all NFTs'+transaction)
       const items = await Promise.all(transaction.map(async i => {
-        console.log(i)
+        // console.log(i)
         const tokenUri = await contract.tokenURI(i.tokenId)
         let metadata = await axios.get(tokenUri)
         metadata = metadata.data
-        console.log(i.tokenId)
+        // console.log(i.tokenId)
         let price = ethers.formatUnits(i._price.toString(), 'ether')
         
         let item = {
@@ -34,7 +34,7 @@ function Home() {
       }))
 
       setNfts(items)
-      console.log(items)
+      // console.log(items)
     }
     catch (er) {
       console.log(er)
