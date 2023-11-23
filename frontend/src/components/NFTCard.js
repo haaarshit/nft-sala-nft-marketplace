@@ -16,7 +16,7 @@ function NFTCard({ data }) {
         else updateAddress(data.seller.slice(0, 10) + "....")
     }
     useEffect(() => {
-        console.log(data)
+        // console.log(data)
         getAddress()
     }, [])
     return (

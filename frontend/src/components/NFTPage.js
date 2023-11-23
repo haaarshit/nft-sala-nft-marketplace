@@ -16,6 +16,8 @@ function NFTPage() {
       let contract = new ethers.Contract(marketPlace.address, marketPlace.abi, signer)
       setContract(contract)
       const tokenUri = await contract.tokenURI(id)
+      const owner  =await contract.ownerOf(id)
+      console.log("owner of nft is "+owner)
       setTokenUri(tokenUri)
       const token = await contract.getTokenFromId(id)
       let metadata = await axios.get(tokenUri)

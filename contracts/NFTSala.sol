@@ -81,7 +81,6 @@ contract NFTSala is ERC721URIStorage {
         _itemSold.increment();
         // transfer nft from this contract to sender(user who make this transaction)
         _transfer(address(this), msg.sender, tokenId);
-        idToListedToken[tokenId]._ownerOf = payable(msg.sender);
         // tranfer list price to the owner of the smart contract
         payable(owner).transfer(_listPrice);
         // transfer the price value of NFT to seller
